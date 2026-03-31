@@ -40,7 +40,7 @@ export default function Home() {
     <main style={styles.main}>
       <header style={styles.header}>
         <div style={styles.headerInner}>
-          <h1 style={styles.logo}>⚡ FitCalendar</h1>
+          <h1 style={styles.logo}>💪 FitnessComp</h1>
           <p style={styles.tagline}>Toutes les compétitions CrossFit, Hyrox & Fitness Functional en France</p>
         </div>
       </header>
