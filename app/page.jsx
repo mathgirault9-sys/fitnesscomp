@@ -1,12 +1,18 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { supabase } from '../lib/supabase'
+import { createClient } from '@supabase/supabase-js'
+
+const supabase = createClient(
+  process.env.NEXT_PUBLIC_SUPABASE_URL,
+  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+)
 
 const SPORTS = ['Tous', 'CrossFit', 'Hyrox', 'Functional Fitness', 'Haltérophilie', 'Autre']
 
 export default function Home() {
-const [competitions, setCompetitions] = useState(/** @type {any[]} */ ([]))  const [loading, setLoading] = useState(true)
+  const [competitions, setCompetitions] = useState([])
+  const [loading, setLoading] = useState(true)
   const [search, setSearch] = useState('')
   const [sportFilter, setSportFilter] = useState('Tous')
 
@@ -19,7 +25,7 @@ const [competitions, setCompetitions] = useState(/** @type {any[]} */ ([]))  con
       .from('competitions')
       .select('*')
       .order('date', { ascending: true })
-    if (!error) setCompetitions(data)
+    if (!error && data) setCompetitions(data)
     setLoading(false)
   }
 
@@ -32,7 +38,6 @@ const [competitions, setCompetitions] = useState(/** @type {any[]} */ ([]))  con
 
   return (
     <main style={styles.main}>
-      {/* HEADER */}
       <header style={styles.header}>
         <div style={styles.headerInner}>
           <h1 style={styles.logo}>⚡ FitCalendar</h1>
@@ -40,7 +45,6 @@ const [competitions, setCompetitions] = useState(/** @type {any[]} */ ([]))  con
         </div>
       </header>
 
-      {/* FILTRES */}
       <section style={styles.filterSection}>
         <input
           style={styles.searchInput}
@@ -65,12 +69,10 @@ const [competitions, setCompetitions] = useState(/** @type {any[]} */ ([]))  con
         </div>
       </section>
 
-      {/* COMPTEUR */}
       <div style={styles.counter}>
         {loading ? 'Chargement...' : `${filtered.length} compétition${filtered.length > 1 ? 's' : ''} trouvée${filtered.length > 1 ? 's' : ''}`}
       </div>
 
-      {/* LISTE */}
       <section style={styles.grid}>
         {loading ? (
           <p style={styles.loadingText}>Chargement des compétitions...</p>
@@ -78,7 +80,7 @@ const [competitions, setCompetitions] = useState(/** @type {any[]} */ ([]))  con
           <p style={styles.loadingText}>Aucune compétition trouvée.</p>
         ) : (
           filtered.map(comp => (
-            <a
+            
               key={comp.id}
               href={comp.url}
               target="_blank"
@@ -99,7 +101,7 @@ const [competitions, setCompetitions] = useState(/** @type {any[]} */ ([]))  con
                 {comp.date && <span>📅 {comp.date}</span>}
                 {comp.lieu && <span>📍 {comp.lieu}</span>}
               </div>
-              <div style={styles.cardCta}>S'inscrire →</div>
+              <div style={styles.cardCta}>S inscrire →</div>
             </a>
           ))
         )}
@@ -178,7 +180,6 @@ const styles = {
     color: '#aaa',
     fontSize: '14px',
     cursor: 'pointer',
-    transition: 'all 0.2s',
   },
   filterBtnActive: {
     background: '#ffffff',
@@ -211,7 +212,6 @@ const styles = {
     display: 'flex',
     flexDirection: 'column',
     gap: '10px',
-    transition: 'transform 0.2s, border-color 0.2s',
     cursor: 'pointer',
   },
   cardTop: {
