@@ -6,8 +6,7 @@ import { supabase } from '../lib/supabase'
 const SPORTS = ['Tous', 'CrossFit', 'Hyrox', 'Functional Fitness', 'Haltérophilie', 'Autre']
 
 export default function Home() {
-  const [competitions, setCompetitions] = useState([])
-  const [loading, setLoading] = useState(true)
+const [competitions, setCompetitions] = useState(/** @type {any[]} */ ([]))  const [loading, setLoading] = useState(true)
   const [search, setSearch] = useState('')
   const [sportFilter, setSportFilter] = useState('Tous')
 
