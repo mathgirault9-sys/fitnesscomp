@@ -80,7 +80,7 @@ export default function Home() {
           <p style={styles.loadingText}>Aucune compétition trouvée.</p>
         ) : (
           filtered.map(comp => (
-            
+            <a
               key={comp.id}
               href={comp.url}
               target="_blank"
@@ -101,7 +101,7 @@ export default function Home() {
                 {comp.date && <span>📅 {comp.date}</span>}
                 {comp.lieu && <span>📍 {comp.lieu}</span>}
               </div>
-              <div style={styles.cardCta}>S inscrire →</div>
+              <div style={styles.cardCta}>S&apos;inscrire →</div>
             </a>
           ))
         )}
