@@ -41,7 +41,7 @@ export default function Home() {
       <header style={styles.header}>
         <div style={styles.headerInner}>
           <h1 style={styles.logo}>⚡ FitCalendar</h1>
-          <p style={styles.tagline}>Toutes les compétitions CrossFit, Hyrox & Functional en France</p>
+          <p style={styles.tagline}>Toutes les compétitions CrossFit, Hyrox & Fitness Functional en France</p>
         </div>
       </header>
 
